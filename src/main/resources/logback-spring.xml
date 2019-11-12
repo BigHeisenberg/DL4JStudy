@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 	<!-- 开发环境日志文件路径TEST_FILE_PATH -->
+ 	<!-- 注意:Logs不能手动在D盘下创建 -->
+    <property name="DEV_FILE_PATH" value="D:/Logs/" />
+    <!-- 生产环境日志文件路径PRO_FILE_PATH -->
+    <property name="PRO_FILE_PATH" value="./logs" /> 
+
+    <!-- 文件输出格式 -->
+    <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%level] [%thread] %c.%L >>> %msg%n" />
+
+
+    <!-- 开发环境 -->
+    <springProfile name="dev">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${PATTERN}</pattern>
+            </encoder>
+        </appender>
+        <appender name="DEV_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${DEV_FILE_PATH}/dl4jStudy.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>7</MaxHistory>
+            </rollingPolicy>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>${PATTERN}</pattern>
+            </layout>
+        </appender>
+        <root level="INFO" debug="false">
+           <!--  <appender-ref ref="DEV_FILE" /> -->
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+    
+    
+    <!-- 生产环境 -->
+    <springProfile name="prod">
+        <appender name="PROD_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${PRO_FILE_PATH}/profile.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <MaxHistory>7</MaxHistory>
+            </rollingPolicy>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>${PATTERN}</pattern>
+            </layout>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="PROD_FILE" />
+        </root>
+    </springProfile>
+    
+    
+</configuration>
