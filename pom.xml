@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.5.2</version>
+			<version>4.5.13</version>
 		</dependency>
 		<!-- 如果httpclient不能加载这个包需要单独导入，为了使用上传附件功能 -->
 		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime -->
